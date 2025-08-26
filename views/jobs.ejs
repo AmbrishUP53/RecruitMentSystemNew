@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Jobs</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">Recruitment System</h1>
+      <div>
+        <a href="/dashboard" class="px-3">Dashboard</a>
+        <a href="/jobs" class="px-3">Jobs</a>
+        <a href="/logout" class="px-3">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Jobs List -->
+  <div class="container mx-auto mt-8">
+    <h2 class="text-2xl font-bold mb-6">Available Jobs</h2>
+    
+    <% if (jobs.length === 0) { %>
+      <p class="text-gray-600">No jobs available right now.</p>
+    <% } else { %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% jobs.forEach(job => { %>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold"><%= job.title %></h3>
+            <p class="text-gray-600 mt-2"><%= job.description %></p>
+            <p class="mt-2"><strong>Location:</strong> <%= job.location %></p>
+            <p class="mt-1"><strong>Salary:</strong> ₹<%= job.salary %></p>
+
+            <form action="/applications/apply/<%=job._id%>" method="get" class="mt-4">
+              <input type="hidden" name="jobId" value="<%= job._id %>">
+              <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Apply
+              </button>
+            </form>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

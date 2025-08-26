@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Applications</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4 text-white flex justify-between items-center shadow-md">
+    <h1 class="text-xl font-bold">Recruitment System</h1>
+    <div>
+      <a href="/logout" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600 transition">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="text-center py-10 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+    <h2 class="text-4xl font-bold mb-2 drop-shadow-lg">Your Applications</h2>
+    <p class="text-lg drop-shadow-md">Track all the jobs you've applied for and stay updated on your career journey.</p>
+  </section>
+
+  <!-- Applications Grid -->
+  <section class="max-w-7xl mx-auto p-6 mt-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% applications.forEach(app => { %>
+        <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-blue-500 hover:shadow-xl transition">
+          <h3 class="text-2xl font-bold mb-2"><%= app.jobId.title %></h3>
+          <p class="text-gray-700 mb-1"><span class="font-semibold">Description:</span> <%= app.jobId.description %></p>
+          <p class="text-gray-600 text-sm mb-1"><span class="font-semibold">Location:</span> <%= app.jobId.location %></p>
+          <p class="text-gray-600 text-sm mb-3"><span class="font-semibold">Salary:</span> ₹<%= app.jobId.salary %></p>
+          
+          <hr class="my-2">
+          
+          <p class="text-gray-700"><span class="font-semibold">Name:</span> <%= app.name %></p>
+          <p class="text-gray-700"><span class="font-semibold">Email:</span> <%= app.email %></p>
+          <p class="text-gray-700"><span class="font-semibold">Mobile:</span> <%= app.mobileNo %></p>
+          <p class="text-gray-700"><span class="font-semibold">Address:</span> <%= app.address %></p>
+          <p class="text-gray-700"><span class="font-semibold">Work Experience:</span> <%= app.workExperience %></p>
+          <p class="text-gray-700"><span class="font-semibold">Resume:</span> <a href="<%= app.resumeLink %>" target="_blank" class="text-blue-500 underline">View</a></p>
+          <p class="text-gray-700"><span class="font-semibold">Classification:</span> <%= app.classification %></p>
+          <p class="text-gray-700"><span class="font-semibold">Status:</span> <%= app.status %></p>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+</body>
+</html>

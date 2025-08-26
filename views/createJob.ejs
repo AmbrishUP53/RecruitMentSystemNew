@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Job</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6">Post a Job</h2>
+
+    <form action="/jobs/create" method="POST" class="space-y-4">
+      <input type="text" name="title" placeholder="Job Title" class="w-full p-2 border rounded" required>
+      <textarea name="description" placeholder="Job Description" class="w-full p-2 border rounded" required></textarea>
+      <input type="text" name="location" placeholder="Location" class="w-full p-2 border rounded" required>
+      <input type="number" name="salary" placeholder="Salary" class="w-full p-2 border rounded" required>
+      <input type="text" name="category" placeholder="Category" class="w-full p-2 border rounded" required>
+
+      <!-- RecruiterId should be automatically taken from session -->
+      <input type="hidden" name="recruiterId" value="<%= user._id %>">
+
+      <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Create Job
+      </button>
+    </form>
+  </div>
+</body>
+</html>

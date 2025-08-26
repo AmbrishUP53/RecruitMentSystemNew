@@ -1,0 +1,59 @@
+<!-- views/recruiterjobs.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recruiter Jobs</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4 text-white flex justify-between">
+    <h1 class="text-xl font-bold">Recruiter Dashboard</h1>
+    <a href="/logout" class="bg-red-500 px-3 py-1 rounded hover:bg-red-700">Logout</a>
+  </nav>
+
+  <div class="max-w-5xl mx-auto p-6">
+    <!-- Post Job Form -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Post a New Job</h2>
+     <form action="/jobs/create" method="POST" class="space-y-4">
+      <input type="text" name="title" placeholder="Job Title" class="w-full p-2 border rounded" required>
+      <textarea name="description" placeholder="Job Description" class="w-full p-2 border rounded" required></textarea>
+      <input type="text" name="location" placeholder="Location" class="w-full p-2 border rounded" required>
+      <input type="number" name="salary" placeholder="Salary" class="w-full p-2 border rounded" required>
+      <input type="text" name="category" placeholder="Category" class="w-full p-2 border rounded" required>
+
+      <!-- RecruiterId should be automatically taken from session -->
+      <input type="hidden" name="recruiterId" value="<%= user._id %>">
+
+      <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Create Job
+      </button>
+    </form>
+    </div>
+
+    <!-- Jobs Posted by Recruiter -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-2xl font-semibold mb-4">Your Posted Jobs</h2>
+      
+      <% if (jobs && jobs.length > 0) { %>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <% jobs.forEach(job => { %>
+            <div class="border rounded-lg p-4 shadow hover:shadow-lg transition">
+              <h3 class="text-xl font-bold"><%= job.title %></h3>
+              <p class="text-gray-600 mb-2"><%= job.description %></p>
+              <p class="text-sm text-gray-500">📍 <%= job.location %></p>
+              <p class="text-sm text-gray-500">💰 <%= job.salary %></p>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="text-gray-500">You haven’t posted any jobs yet.</p>
+      <% } %>
+    </div>
+  </div>
+
+</body>
+</html>

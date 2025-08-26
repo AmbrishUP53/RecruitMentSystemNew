@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruitment System - Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script defer src="/js/main.js"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4 text-white flex justify-between items-center shadow-md">
+    <h1 class="text-2xl font-bold">Recruitment System</h1>
+    <div class="flex gap-3">
+      <a href="/login" class="px-4 py-2 bg-white text-blue-600 font-semibold rounded hover:bg-gray-100 transition">Login</a>
+      <a href="/signup" class="px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-green-600 transition">Signup</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative text-center py-20 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+    <h2 class="text-5xl font-bold mb-4 drop-shadow-lg">Find Your Dream Job</h2>
+    <p class="text-xl mb-6 drop-shadow-md">Unlock opportunities, explore careers, and take the next step towards your future.</p>
+    <div class="flex justify-center gap-4">
+      <a href="/jobs" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg">Browse Jobs</a>
+      <a href="/signup" class="bg-green-500 px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition shadow-lg">Get Started</a>
+    </div>
+    <p class="mt-6 italic text-gray-200">"Your career journey starts here — don't wait for opportunity, create it!"</p>
+  </section>
+
+  <!-- Latest Jobs Section -->
+  <section class="max-w-7xl mx-auto p-6 mt-12">
+    <h3 class="text-3xl font-semibold mb-6 text-gray-700">Latest Job Openings</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% jobs.forEach(job => { %>
+        <div class="bg-white shadow-lg rounded-lg p-6 border-t-4 border-blue-500 hover:shadow-xl transition">
+          <h4 class="text-2xl font-bold mb-2"><%= job.title %></h4>
+          <p class="text-gray-700 mb-2"><%= job.description %></p>
+          <p class="text-gray-600 text-sm mb-1">Location: <%= job.location %></p>
+          <p class="text-gray-600 text-sm mb-3">Salary: ₹<%= job.salary %></p>
+          <a 
+            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition shadow-md block text-center"
+            href="/applications/apply/<%=job._id%>"
+          >
+            Apply Now
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4 text-white flex justify-between items-center shadow-md">
+    <h1 class="text-xl font-bold">Recruitment System</h1>
+    <div>
+      <a href="/logout" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600 transition">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="max-w-7xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+
+    <!-- User Info Card -->
+    <div class="col-span-1 bg-white shadow-lg p-6 rounded-lg border-t-4 border-blue-600">
+      <h2 class="text-xl font-semibold mb-4">Profile</h2>
+      <p class="mb-2"><span class="font-bold">Name:</span> <%= user.name %></p>
+      <p class="mb-2"><span class="font-bold">Email:</span> <%= user.email %></p>
+      <p class="mb-2"><span class="font-bold">Role:</span> <%= user.role %></p>
+    </div>
+
+    <!-- Recruiter Section -->
+    <% if(user.role === "recruiter") { %>
+    <div class="col-span-2 bg-white shadow-lg p-6 rounded-lg border-t-4 border-green-500">
+      <h2 class="text-xl font-semibold mb-4">Recruiter Dashboard</h2>
+      <div class="flex flex-wrap gap-4">
+        <a href="/jobs/create" class="bg-green-500 text-white px-5 py-3 rounded-lg hover:bg-green-600 transition shadow-md">
+          Post a Job
+        </a>
+        <a href="/jobs" class="bg-blue-500 text-white px-5 py-3 rounded-lg hover:bg-blue-600 transition shadow-md">
+          View All Jobs
+        </a>
+        <a href="/recruiter-jobs/<%= user._id %>" class="bg-purple-500 text-white px-5 py-3 rounded-lg hover:bg-purple-600 transition shadow-md">
+          My Posted Jobs
+        </a>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- Employee Section -->
+    <% if(user.role === "employee") { %>
+    <div class="col-span-2 bg-white shadow-lg p-6 rounded-lg border-t-4 border-indigo-500">
+      <h2 class="text-xl font-semibold mb-4">Employee Dashboard</h2>
+      <div class="flex flex-wrap gap-4">
+        <a href="/jobs" class="bg-blue-500 text-white px-5 py-3 rounded-lg hover:bg-blue-600 transition shadow-md">
+          Browse Jobs
+        </a>
+        <a href="/applications/myjobs/<%= user._id %>" class="bg-purple-500 text-white px-5 py-3 rounded-lg hover:bg-purple-600 transition shadow-md">
+          My Applications
+        </a>
+      </div>
+    </div>
+    <% } %>
+
+  </div>
+
+</body>
+</html>

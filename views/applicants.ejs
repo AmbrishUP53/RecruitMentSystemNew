@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applicants</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+  <h1 class="text-3xl font-bold mb-6">Applicants for "<%= job.title %>"</h1>
+
+  <% if (applicants && applicants.length > 0) { %>
+    <div class="space-y-4">
+      <% applicants.forEach(applicant => { %>
+        <div class="bg-white shadow-md rounded-lg p-4 flex justify-between items-center">
+          <div>
+            <p class="text-lg font-semibold"><%= applicant.name %></p>
+            <p class="text-gray-600">📧 <%= applicant.email %></p>
+          </div>
+          <a href="mailto:<%= applicant.email %>" 
+             class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Contact</a>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p class="text-gray-600">No applicants have applied yet.</p>
+  <% } %>
+
+  <div class="mt-6">
+    <a href="/recruiter/jobs" class="text-blue-600 hover:underline">← Back to Jobs</a>
+  </div>
+</body>
+</html>
