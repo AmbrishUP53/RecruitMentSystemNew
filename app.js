@@ -26,7 +26,7 @@ app.set("views", path.join(__dirname, "views"));
 
 // Sessions (for login state)
 app.use(session({
-  secret: "yourSecretKey",
+  secret: process.env.SESSION_KEY,
   resave: false,
   saveUninitialized: false,
   rolling: true,
